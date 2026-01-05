@@ -35,6 +35,7 @@ gh_virt_wdt.ko
 hwkm.ko
 icc-bcm-voter.ko
 iommu-logger.ko
+kryo_arm64_edac.ko
 llcc-qcom.ko
 mac80211.ko
 mem_buf_dev.ko
@@ -266,6 +267,7 @@ qti_cpufreq_cdev.ko
 qti_devfreq_cdev.ko
 btpower.ko
 bt_fm_slim.ko
+qcom_edac.ko
 qcom_lpm.ko
 sdhci-msm.ko
 leds-qti-flash.ko
