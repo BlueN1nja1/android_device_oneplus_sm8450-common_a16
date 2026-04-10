@@ -35,7 +35,6 @@ audio.sys.noisy.broadcast.delay=500
 # Optimizer
 persist.sys.perf.scroll_opt=true
 persist.sys.perf.scroll_opt.heavy_app=2
-ro.product.marketname=Realme GT2 Pro
 ro.sf.blurs_are_expensive=1
 ro.surface_flinger.supports_background_blur=1
 
