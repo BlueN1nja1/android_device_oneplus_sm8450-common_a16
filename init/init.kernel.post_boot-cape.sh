@@ -5,11 +5,18 @@
 #=============================================================================
 
 function configure_read_ahead_kb_values() {
+	MemTotalStr=`cat /proc/meminfo | grep MemTotal`
+	MemTotal=${MemTotalStr:16:8}
 
 	dmpts=$(ls /sys/block/*/queue/read_ahead_kb | grep -e dm -e mmc)
 
-	ra_kb=128
-
+	# Set 128 for <= 3GB &
+	# set 512 for >= 4GB targets.
+	if [ $MemTotal -le 3145728 ]; then
+		ra_kb=128
+	else
+		ra_kb=512
+	fi
 	if [ -f /sys/block/mmcblk0/bdi/read_ahead_kb ]; then
 		echo $ra_kb > /sys/block/mmcblk0/bdi/read_ahead_kb
 	fi
@@ -58,8 +65,23 @@ function configure_memory_parameters() {
 		echo 128000 > /proc/boost_pool/camera_pages
 	fi
 
+	# Configure zswap as compressed L1 cache before pages spill to zram.
+	if [ -f /sys/module/zswap/parameters/compressor ]; then
+		echo lz4 > /sys/module/zswap/parameters/compressor
+	fi
+	if [ -f /sys/module/zswap/parameters/zpool ]; then
+		echo zsmalloc > /sys/module/zswap/parameters/zpool
+	fi
+	if [ -f /sys/module/zswap/parameters/enabled ]; then
+		echo 1 > /sys/module/zswap/parameters/enabled
+	fi
+	if [ -f /sys/module/zswap/parameters/max_pool_percent ]; then
+		echo 50 > /sys/module/zswap/parameters/max_pool_percent
+	fi
+
 	configure_read_ahead_kb_values
-	echo 100 > /proc/sys/vm/swappiness
+	echo 0 > /proc/sys/vm/page-cluster
+	echo 160 > /proc/sys/vm/swappiness
 
 	# Disable periodic kcompactd wakeups. We do not use THP, so having many
 	# huge pages is not as necessary.
@@ -134,10 +156,8 @@ echo 15 15 15 15 15 15 15 15 > /proc/sys/walt/sched_util_busy_hyst_cpu_util
 echo 325 > /proc/sys/walt/walt_low_latency_task_threshold
 
 # cpuset parameters
-echo 0-1 > /dev/cpuset/background/cpus
-echo 0-2 > /dev/cpuset/restricted/cpus
-echo 0-2 > /dev/cpuset/system-background/cpus
-echo 0-6 > /dev/cpuset/foreground/cpus
+echo 0-3 > /dev/cpuset/background/cpus
+echo 0-3 > /dev/cpuset/system-background/cpus
 
 # Turn off scheduler boost at the end
 echo 0 > /proc/sys/walt/sched_boost

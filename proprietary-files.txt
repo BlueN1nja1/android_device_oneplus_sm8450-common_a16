@@ -1,5 +1,5 @@
 ## All proprietary files from this list, unless pinned and noted otherwise, are
-## from OnePlus 10 Pro 5G (NE2213_15.0.0.1302(EX01)).
+## from OnePlus 10 Pro 5G (NE2211_15.0.0.901(EX01))).
 
 # ACDBs
 vendor/etc/acdbdata/nn_ns_models/fai__2.0.0_0.1__3.0.0_0.0__eai_1.36_enpu2.pmd
@@ -8,6 +8,8 @@ vendor/etc/acdbdata/nn_ns_models/fai__2.3.0_0.1__3.0.0_0.0__eai_1.36_enpu2_comp.
 vendor/etc/acdbdata/nn_ns_models/fai__2.7.20_0.0__3.0.0_0.0__eai_1.36_enpu2.pmd
 vendor/etc/acdbdata/nn_ns_models/fai__2.7.2_0.0__3.0.0_0.0__eai_1.36_enpu2.pmd
 vendor/etc/acdbdata/nn_vad_models/fai__3.0.0_0.0__eai_1.36_enpu2.pmd
+vendor/etc/acdbdata/waipio_qrd/QRD_acdb_cal.acdb
+vendor/etc/acdbdata/waipio_qrd/QRD_workspaceFileXml.qwsp
 
 # ADSP
 vendor/bin/adsprpcd
@@ -137,7 +139,10 @@ vendor/lib64/hw/vendor.qti.hardware.bluetooth_audio@2.1-impl.so
 vendor/lib64/hw/vendor.qti.hardware.bluetooth_sar@1.1-impl.so
 vendor/lib64/hw/vendor.qti.hardware.btconfigstore@1.0-impl.so
 vendor/lib64/hw/vendor.qti.hardware.btconfigstore@2.0-impl.so
+vendor/lib/btaudio_offload_if.so
 vendor/lib64/btaudio_offload_if.so
+vendor/lib/libbluetooth_audio_session_qti.so
+vendor/lib/libbluetooth_audio_session_qti_2_1.so
 vendor/lib64/libbluetooth_audio_session_qti.so
 vendor/lib64/libbluetooth_audio_session_qti_2_1.so
 vendor/lib64/libbt-hidlclient.so
@@ -163,7 +168,10 @@ odm/etc/init/vendor.oplus.hardware.charger-V6-service.rc
 odm/etc/vintf/manifest/manifest_oplus_charger_aidl.xml
 odm/firmware/fastchg/charge_time_config.csv|e5bcc378513cb42bcb071eef327c87920553b0c4
 odm/firmware/fastchg/charging_thermal_config_default.txt
+odm/lib/libGaiaClient_vnd.so
 odm/lib64/libGaiaClient_vnd.so
+odm/lib/vendor.oplus.hardware.charger@1.0.so
+odm/lib64/vendor.oplus.hardware.charger@1.0.so
 odm/lib64/vendor.oplus.hardware.charger-V6-ndk_platform.so
 vendor/etc/charger_fw_fstab.qti
 
@@ -303,6 +311,7 @@ vendor/etc/Oplus_QC_LTM_SM7475_2023_02_01.pfm
 vendor/etc/Oplus_QC_LTM_SM8450_2021_10_12.pfm
 vendor/etc/Oplus_QC_LTM_SM8475_2022_05_10.pfm
 vendor/etc/Oplus_QC_LTM_SM8475_2022_07_05.pfm
+vendor/lib/libPanelChaplin.so
 vendor/lib64/libPanelChaplin.so
 
 # Display (HDR)
@@ -331,16 +340,33 @@ odm/etc/init/vendor.pixelworks.hardware.feature.irisfeature-service.rc
 odm/etc/vintf/manifest/vendor.pixelworks.hardware.display.iris-service.xml
 odm/etc/vintf/manifest/vendor.pixelworks.hardware.feature.irisfeature-service.xml
 odm/lib64/libpwirisIoctlWrapper.so
+odm/lib/libpwirisIoctlWrapper.so
 odm/lib64/libpwiriscalibrate.so
+odm/lib/libpwiriscalibrate.so
 odm/lib64/libpwirisservice.so
+odm/lib/libpwirisservice.so
 odm/lib64/libpwirissoft.so
+odm/lib/libpwirissoft.so
+odm/bin/opnscr_aidl
 odm/lib64/libpwsoftirisPCS.so
+odm/lib/libpwsoftirisPCS.so
 odm/lib64/libsnapdragoncolor-pxlw.so
 vendor/lib64/libpwirisfeature.so
+vendor/lib/libpwirisfeature.so
 vendor/lib64/libpwirishalwrapper.so
+vendor/lib/vendor.pixelworks.hardware.display@1.0.so
+vendor/lib/vendor.pixelworks.hardware.display@1.1.so
+vendor/lib/vendor.pixelworks.hardware.display@1.2.so
+vendor/lib64/vendor.pixelworks.hardware.display@1.0.so
+vendor/lib64/vendor.pixelworks.hardware.display@1.1.so
+vendor/lib64/vendor.pixelworks.hardware.display@1.2.so
+vendor/lib64/vendor.pixelworks.hardware.feature@1.0.so
+vendor/lib/vendor.pixelworks.hardware.feature@1.0.so
 
 # Display (SDM) - from ingot
+vendor/lib/libdisplayskuutils.so|405e2456d79c8e0118efb9ade2d8a8d82565af5c
 vendor/lib64/libdisplayskuutils.so|405e2456d79c8e0118efb9ade2d8a8d82565af5c
+vendor/lib/libsdmextension.so|08d321d3e0da2231a29e3ec92604dca48c8895e3
 vendor/lib64/libsdmextension.so|08d321d3e0da2231a29e3ec92604dca48c8895e3
 
 # Display (SDM)
@@ -457,7 +483,6 @@ vendor/lib64/egl/libq3dtools_adreno.so;SYMLINK=vendor/lib64/libq3dtools_adreno.s
 vendor/lib64/egl/libq3dtools_esx.so
 vendor/lib64/libCB.so
 vendor/lib64/libOpenCL.so
-vendor/lib64/libadreno_app_profiles.so;DISABLE_CHECKELF
 vendor/lib64/libadreno_utils.so
 vendor/lib64/libgpudataproducer.so
 vendor/lib64/libgsl.so
@@ -555,12 +580,18 @@ vendor/lib64/vendor.qti.hardware.qccvndhal@1.0.so;MODULE_SUFFIX=_vendor
 
 # Horae
 system/lib64/libostatslog.so:system_ext/lib64/libostatslog.so
+system/lib64/vendor.oplus.hardware.displaypanelfeature-V1-ndk.so:system_ext/lib64/vendor.oplus.hardware.displaypanelfeature-V1-ndk.so
 system_ext/bin/horae
 system_ext/etc/horae/horae.conf
 system_ext/etc/horae/horae_SM8450.conf
 system_ext/etc/horae/horae_SM8475.conf
 system_ext/etc/init/horae.rc
+system_ext/framework/vendor.oplus.hardware.charger-V6-java.jar
+system_ext/lib/vendor.oplus.hardware.charger-V1-ndk.so
+system_ext/lib/vendor.oplus.hardware.charger-V6-ndk.so
 system_ext/lib64/vendor.oplus.hardware.charger-V1-ndk.so
+system_ext/lib64/vendor.oplus.hardware.charger-V6-ndk.so
+system_ext/lib64/vendor.oplus.hardware.displaypanelfeature@1.0.so
 
 # Hotword Enrollment
 my_product/etc/sysconfig/com.android.hotwordenrollment.common.util.xml:product/etc/sysconfig/com.android.hotwordenrollment.common.util.xml
@@ -659,6 +690,7 @@ vendor/etc/msm_irqbalance.conf
 vendor/bin/init.kernel.post_boot.sh
 vendor/bin/init.qti.kernel.sh
 vendor/bin/vendor_modprobe.sh
+vendor/etc/init/hw/init.qti.kernel.rc
 
 # Keymaster
 vendor/bin/hw/android.hardware.keymaster@4.1-service-qti
@@ -752,11 +784,6 @@ vendor/lib64/vendor.oplus.hardware.olc2-V1-ndk_platform.so
 # Oplus osense
 odm/lib64/libosenseaidlhalclient.so
 
-# PASR manager
-vendor/lib64/vendor.qti.memory.pasrmanager@1.0.so
-vendor/lib64/vendor.qti.memory.pasrmanager@1.1.so
-vendor/lib64/vendor.qti.power.pasrmanager@1.0.so
-
 # Peripheral manager
 vendor/bin/pm-proxy
 vendor/bin/pm-service
@@ -767,11 +794,28 @@ vendor/bin/pd-mapper
 vendor/lib64/libpdmapper.so
 vendor/lib64/libpdnotifier.so
 
+# Perf
+vendor/etc/perf/testcommonresourceconfigs.xml
+vendor/etc/perf/testtargetresourceconfigs.xml
+vendor/etc/powerhint.xml
+
 # Power-off alarm (vendor)
 vendor/bin/hw/vendor.qti.hardware.alarm@1.0-service
 vendor/etc/init/vendor.qti.hardware.alarm@1.0-service.rc
 vendor/lib64/hw/vendor.qti.hardware.alarm@1.0-impl.so
 vendor/lib64/vendor.qti.hardware.alarm@1.0.so
+
+# Poweropt
+vendor/bin/poweropt-service
+vendor/etc/init/poweropt-service.rc
+vendor/etc/vintf/manifest/vendor.qti.hardware.power.powermodule.xml
+vendor/lib64/libpowercallback.so
+vendor/lib64/libpowercore.so
+vendor/lib64/libpsmoptfeature.so
+vendor/lib64/libstandbyfeature.so
+vendor/lib64/libvendorscenariopoweroptfeature.so
+vendor/lib64/libvideooptfeature.so
+vendor/lib64/vendor.qti.hardware.power.powermodule@1.0.so
 
 # QCC
 system_ext/app/QCC/QCC.apk
@@ -1226,7 +1270,7 @@ system_ext/lib64/libwfddisplayconfig.so|27f5d6e284edf05cc7776e5be010912973000ab9
 system_ext/lib64/libwfdmminterface.so|8d3d493fef797aef2feaab4e09e50250ddf5dc9a
 system_ext/lib64/libwfdmmsink.so|4569ce9941eb5d06db599146ed80b8a32d7cd97f
 system_ext/lib64/libwfdmmsrc_system.so|0cc970954800566baddbf760b153b027940180f5
-system_ext/lib64/libwfdnative.so;SYMLINK=system_ext/priv-app/WfdService/lib/arm64/libwfdnative.so|9513bbbd813dd05fb063d3c9e72640a1bc9156c2
+system_ext/lib64/libwfdnative.so;SYMLINK=system_ext/priv-app/WfdService/lib/arm64/libwfdnative.so
 system_ext/lib64/libwfdrtsp.so|1ab4fc5b75d25f551df3593d5856e6f7893a4176
 system_ext/lib64/libwfdservice.so|af0e31f17ed997a5d8bad64cdad486be28cb9f07
 system_ext/lib64/libwfdsinksm.so|cc899b719fa11d844c65908d7fdc18600451324d

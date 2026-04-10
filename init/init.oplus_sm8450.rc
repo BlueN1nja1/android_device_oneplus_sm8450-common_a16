@@ -1,0 +1,43 @@
+#
+# Copyright (C) 2024 The LineageOS Project
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+on fs
+    mkdir /mnt/vendor/persist/haptics 0755 system system
+    mkdir /mnt/vendor/persist/audio 0755 system system
+    mkdir /mnt/vendor/persist/qca6490/ 0700 system system
+
+on boot
+
+    # Set fingerprint related permissions
+    chmod 0660 /dev/goodix_fp
+    chown system system /dev/goodix_fp
+    chown system system /sys/bus/platform/devices/soc:goodix_fp/irq
+    chown system system /sys/bus/platform/devices/soc:goodix_fp/irq_enable
+    chown system system /sys/bus/platform/devices/soc:goodix_fp/wakeup_enable
+    chown system system /sys/bus/platform/devices/soc:goodix_fp/hw_reset
+    chown system system /sys/bus/platform/devices/soc:goodix_fp/device_prepare
+    chown system system /sys/bus/platform/devices/soc:goodix_fp/fingerdown_wait
+    chown system system /sys/bus/platform/devices/soc:goodix_fp/vendor
+    chown system system /sys/bus/platform/devices/soc:goodix_fp/request_vreg
+    chown system system /sys/bus/platform/devices/soc:goodix_fp/simulate_irq
+    chown system system /sys/bus/platform/devices/soc:goodix_fp/finger_irq
+    chown system system /sys/bus/platform/devices/soc:goodix_fp/power_cfg
+
+    # High touch polling rate
+    chown system system /sys/devices/virtual/touch/touch_dev/bump_sample_rate
+    chmod 0660 /sys/devices/virtual/touch/touch_dev/bump_sample_rate
+
+on post-fs-data
+
+    # Enable PowerHAL hint processing
+    setprop vendor.powerhal.init 1
+
+    # Create fingerprint related directories
+    mkdir /data/vendor/fpc 0770 system system
+    mkdir /data/vendor/fpdump 0770 system system
+    mkdir /data/vendor/goodix 0770 system system
+    mkdir /mnt/vendor/persist/fpc 0770 system system
+    mkdir /mnt/vendor/persist/goodix 0770 system system

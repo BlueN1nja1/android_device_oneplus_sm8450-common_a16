@@ -18,13 +18,6 @@ prebuilt_etc {
 }
 
 prebuilt_etc {
-    name: "init.qti.kernel.rc",
-    src: "init.qti.kernel.rc",
-    sub_dir: "init/hw",
-    vendor: true,
-}
-
-prebuilt_etc {
     name: "init.oplus.hw.rc",
     src: "init.oplus.hw.rc",
     sub_dir: "init",
@@ -44,6 +37,13 @@ prebuilt_etc {
     src: "init.qcom.rc",
     sub_dir: "init/hw",
     vendor: true,
+}
+
+prebuilt_etc {
+    name: "init.oplus_sm8450.rc",
+    src: "init.oplus_sm8450.rc",
+    sub_dir: "init",
+    recovery: true,
 }
 
 prebuilt_etc {
@@ -87,12 +87,6 @@ sh_binary {
 }
 
 sh_binary {
-    name: "init.qcom.post_boot.sh",
-    src: "init.qcom.post_boot.sh",
-    vendor: true,
-}
-
-sh_binary {
     name: "init.kernel.post_boot-cape.sh",
     src: "init.kernel.post_boot-cape.sh",
     vendor: true,
@@ -108,10 +102,3 @@ sh_binary {
     src: "init.qcom.sh",
     vendor: true,
 }
-
-prebuilt_etc {
-    name: "fstab.zram",
-    src: "fstab.zram",
-    vendor: true,
-}
-

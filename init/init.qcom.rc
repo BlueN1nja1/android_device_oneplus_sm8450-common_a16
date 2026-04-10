@@ -93,7 +93,7 @@ on init
 
     # Create cgroup mount point for memory
     mkdir /sys/fs/cgroup/memory/bg 0750 root system
-    write /sys/fs/cgroup/memory/bg/memory.swappiness 140
+    write /sys/fs/cgroup/memory/bg/memory.swappiness 160
     write /sys/fs/cgroup/memory/bg/memory.move_charge_at_immigrate 1
     chown root system /sys/fs/cgroup/memory/bg/tasks
     chmod 0660 /sys/fs/cgroup/memory/bg/tasks
@@ -392,6 +392,11 @@ on post-fs-data
     mkdir /data/vendor/swap 0770 root system
     chmod 2770 /data/vendor/swap
 
+    # set aggressive read ahead for dm-0 and dm-1 during boot up
+    write /sys/block/dm-0/queue/read_ahead_kb 2048
+    write /sys/block/dm-1/queue/read_ahead_kb 2048
+    write /sys/block/dm-2/queue/read_ahead_kb 2048
+
     # Create vpp directory
     mkdir /data/vendor/vpp 0770 media media
 
@@ -484,6 +489,9 @@ on property:sys.boot_completed=1
     write /sys/bus/platform/devices/1d84000.ufshc/clkscale_enable 1
     write /sys/bus/platform/devices/1d84000.ufshc/auto_hibern8 5000
     write /sys/bus/platform/devices/1d84000.ufshc/clkgate_enable 1
+    #Reset read ahead for dm-0 and dm-1 to 512kb
+    write /sys/block/dm-0/queue/read_ahead_kb 512
+    write /sys/block/dm-1/queue/read_ahead_kb 512
     #WDSP FW boot sysfs node used by STHAL
     chown media audio /sys/kernel/wdsp0/boot
     chown media audio /sys/kernel/wcd_cpe0/fw_name
@@ -491,20 +499,6 @@ on property:sys.boot_completed=1
     setprop lmkd.reinit 1
     chown media audio /sys/kernel/aud_dev/state
     write /sys/devices/virtual/cvp/cvp/boot 1
-
-    # Power hal
-    chown system system /sys/devices/system/cpu/cpufreq/policy0/walt/up_rate_limit_us
-    chown system system /sys/devices/system/cpu/cpufreq/policy0/walt/down_rate_limit_us
-    chown system system /sys/devices/system/cpu/cpufreq/policy4/walt/up_rate_limit_us
-    chown system system /sys/devices/system/cpu/cpufreq/policy4/walt/down_rate_limit_us
-    chown system system /sys/devices/system/cpu/cpufreq/policy7/walt/up_rate_limit_us
-    chown system system /sys/devices/system/cpu/cpufreq/policy7/walt/down_rate_limit_us
-    chmod 0664 /sys/devices/system/cpu/cpufreq/policy0/walt/up_rate_limit_us
-    chmod 0664 /sys/devices/system/cpu/cpufreq/policy0/walt/down_rate_limit_us
-    chmod 0664 /sys/devices/system/cpu/cpufreq/policy4/walt/up_rate_limit_us
-    chmod 0664 /sys/devices/system/cpu/cpufreq/policy4/walt/down_rate_limit_us
-    chmod 0664 /sys/devices/system/cpu/cpufreq/policy7/walt/up_rate_limit_us
-    chmod 0664 /sys/devices/system/cpu/cpufreq/policy7/walt/down_rate_limit_us
 
 # corefile limit
 on property:persist.debug.trace=1
