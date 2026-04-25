@@ -22,28 +22,10 @@ persist.log.tag.OpenGLRenderer=S
 persist.log.tag.ultrasound_extn=S
 persist.log.tag.minksocket=S
 persist.log.tag.QTIPowerHAL=S
-persist.log.tag.WindowRootViewBinder=S
-persist.log.tag.BlurUtils=S
-persist.log.tag.FrameTracker=S
-persist.log.tag.NotifRow=S
-persist.log.tag.QuickAccessWalletKeyguardQuickAffordanceConfig=S
+ro.product.marketname=Realme GT2 Pro
 pm.sleep_mode=1
-vendor.post_boot.parsed=1
+vendor.post_boot.parsed=1s
+ro.product.marketname=Realme GT2 Pro
 audio.offload.min.duration.secs=30
 audio.sys.offload.pstimeout.secs=3
 audio.sys.noisy.broadcast.delay=500
-# Optimizer
-persist.sys.perf.scroll_opt=true
-persist.sys.perf.scroll_opt.heavy_app=2
-ro.sf.blurs_are_expensive=1
-ro.surface_flinger.supports_background_blur=1
-
-# Memory pressure handling
-ro.lmk.use_psi=true
-ro.lmk.kill_heaviest_task=true
-ro.lmk.kill_timeout_ms=100
-ro.lmk.psi_partial_stall_ms=70
-ro.lmk.psi_complete_stall_ms=700
-ro.lmk.thrashing_limit=30
-ro.lmk.thrashing_limit_decay=50
-ro.lmk.swap_free_low_percentage=10

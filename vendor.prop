@@ -1,46 +1,46 @@
-# ═══════════════════════════════════════════════════════════════════════════════
-# VENDOR.PRO — Android System Properties
-# ═══════════════════════════════════════════════════════════════════════════════
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# SYSTEM & PLATFORM IDENTIFICATION
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 1. SYSTEM & PLATFORM IDENTIFICATION
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# Chipset identification
 ro.soc.manufacturer=QTI
+
+# Factory Reset Protection partition
 ro.frp.pst=/dev/block/bootdevice/by-name/frp
+
+# Netflix certification revision
 ro.netflix.bsp_rev=Q8450-34634-1
+
+# Zygote critical stability window
 zygote.critical_window.minute=10
+
+# Incremental filesystem support
 ro.incremental.enable=yes
 
 
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 2. DISPLAY & GRAPHICS SUBSYSTEM
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# DISPLAY & GRAPHICS SUBSYSTEM
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-# ── SurfaceFlinger Core ───────────────────────────────────────────────────────
-debug.sf.hw=0
+# ── SurfaceFlinger Core Configuration ──────────────────────────────────────────
 debug.sf.latch_unsignaled=1
 debug.sf.enable_transaction_tracing=false
-debug.sf.disable_client_composition_cache=0
+debug.sf.disable_client_composition_cache=1
+debug.egl.swapinterval=1
+debug.egl.profiler=0
+persist.vendor.qcom.adreno.disable_ubwc=0
+persist.vendor.qcom.adreno.idle_time=35
 debug.sf.enable_advanced_sf_phase_offset=1
-debug.sf.enable_gl_backpressure=1
-debug.sf.disable_backpressure=0
+debug.sf.enable_gl_backpressure=0
+debug.sf.disable_backpressure=1
 debug.sf.predict_hwc_composition_strategy=0
 debug.sf.high_fps_early_gl_phase_offset_ns=-2000000
 debug.sf.high_fps_early_phase_offset_ns=-4000000
 debug.sf.high_fps_late_app_phase_offset_ns=1000000
 debug.sf.high_fps_late_sf_phase_offset_ns=-2000000
 debug.sf.treat_170m_as_sRGB=1
-debug.sf.enable_linear_color=true
-debug.egl.swapinterval=1
-debug.egl.profiler=0
-debug.egl.hw=0
 
-# ── Adreno GPU ────────────────────────────────────────────────────────────────
-persist.vendor.qcom.adreno.disable_ubwc=0
-persist.vendor.qcom.adreno.idle_time=35
-
-# ── Display Capabilities & HDR ────────────────────────────────────────────────
+# ── Display Capabilities & HDR ─────────────────────────────────────────────────
 ro.surface_flinger.use_smart_90_for_video=true
 ro.surface_flinger.set_display_power_timer_ms=1000
 ro.surface_flinger.has_wide_color_display=true
@@ -51,11 +51,12 @@ ro.surface_flinger.protected_contents=true
 ro.surface_flinger.use_color_management=true
 ro.surface_flinger.use_content_detection_for_refresh_rate=true
 ro.surface_flinger.wcg_composition_dataspace=143261696
+debug.sf.enable_linear_color=true
 ro.surface_flinger.force_hwc_copy_for_virtual_displays=true
 ro.surface_flinger.supports_background_blur=1
 ro.surface_flinger.enable_frame_rate_override=true
 
-# ── Vendor Display (120Hz Optimization) ───────────────────────────────────────
+# ── Vendor Display Features (120Hz Optimization) ───────────────────────────────
 vendor.display.comp_mask=0
 vendor.display.disable_3d_adaptive_tm=1
 vendor.display.disable_content_fps_hint=0
@@ -75,64 +76,69 @@ vendor.display.enable_optimize_refresh=1
 vendor.display.enable_rounded_corner=1
 vendor.display.use_layer_ext=1
 vendor.display.use_smooth_motion=1
-vendor.display.vds_allow_hwc=0
-debug.sf.frame_rate_multiple_threshold=120
-debug.sf.enable_hwc_vds=1
+vendor.display.vds_allow_hwc=1
 vendor.display.enable_rotator_ui=1
 vendor.gralloc.disable_ubwc=0
 
-# ── Touch Input ───────────────────────────────────────────────────────────────
+# ── Touch Input ────────────────────────────────────────────────────────────────
 ro.input.noresample=1
 touch.pressure.scale=0.001
 
-# ── Graphics HAL ──────────────────────────────────────────────────────────────
+# ── Graphics Hardware Abstraction ──────────────────────────────────────────────
+debug.hwui.skia_tracing_enabled=false
+debug.hwui.skia_use_perfetto_track_events=false
 ro.hardware.egl=adreno
 ro.hardware.vulkan=adreno
 ro.opengles.version=196610
 
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# HWUI RENDERING OPTIMIZATIONS (VULKAN)
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 3. HWUI RENDERING (VULKAN)
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-# ── Core Rendering ────────────────────────────────────────────────────────────
+# Core rendering parameters
 ro.hwui.render_ahead=1
-debug.sf.enable_adpf_cpu_hint=true
 debug.hwui.use_hint_manager=true
 debug.hwui.skia_atrace_enabled=false
 debug.hwui.render_thread_priority=1
+
+# 🔥 Enable Vulkan
 debug.hwui.use_vulkan=true
 debug.hwui.renderer=skiavk
+
+# Keep vsync enabled (never disable on modern devices)
 debug.hwui.disable_vsync=false
+
+# Overdraw debug OFF (production builds)
 debug.hwui.overdraw=false
+
+# Vulkan optimization flags
 renderthread.skia.reduceopstasksplitting=true
 debug.hwui.skip_empty_damage=true
-debug.hwui.skia_tracing_enabled=false
-debug.hwui.skia_use_perfetto_track_events=false
-debug.hwui.target_cpu_time_percent=40
 
-# ── Cache Configuration (Adreno 730) ──────────────────────────────────────────
+# ── Cache Configuration (Adreno 730 tuned) ─────────────────────────────────────
 ro.hwui.drop_shadow_cache_size=8
 ro.hwui.gradient_cache_size=4
-ro.hwui.layer_cache_size=64
+ro.hwui.layer_cache_size=48
 ro.hwui.path_cache_size=32
-ro.hwui.texture_cache_size=128
+ro.hwui.texture_cache_size=96
+
+# Text atlas (leave as-is; Vulkan handles large atlas fine)
 ro.hwui.text_small_cache_width=2048
 ro.hwui.text_small_cache_height=2048
 ro.hwui.text_large_cache_width=4096
 ro.hwui.text_large_cache_height=4096
 
 
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 4. AUDIO SUBSYSTEM
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# AUDIO SUBSYSTEM
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-# ── AAudio Low-Latency ────────────────────────────────────────────────────────
+# ── AAudio Low-Latency Engine ──────────────────────────────────────────────────
 aaudio.hw_burst_min_usec=2000
 aaudio.mmap_exclusive_policy=2
 aaudio.mmap_policy=2
 
-# ── Audio Framework ───────────────────────────────────────────────────────────
+# ── Audio Framework & Offload ──────────────────────────────────────────────────
 af.fast_track_multiplier=2
 audio.offload.video=true
 persist.vendor.audio.auto.scenario=true
@@ -148,29 +154,6 @@ ro.vendor.audio.downmix.attenuation=1
 ro.vendor.audio.sdk.ssr=false
 vendor.audio.adm.buffering.ms=2
 vendor.audio.c2.preferred=true
-vendor.audio.hal.boot.timeout.ms=20000
-vendor.audio.hal.output.suspend.supported=true
-vendor.audio.offload.buffer.size.kb=256
-vendor.audio.offload.gapless.enabled=true
-vendor.audio.offload.multiaac.enable=true
-vendor.audio.offload.track.enable=true
-vendor.audio.parser.ip.buffer.size=262144
-vendor.audio.ull_record_period_multiplier=2
-vendor.audio.use.sw.alac.decoder=true
-vendor.audio.use.sw.ape.decoder=true
-vendor.audio.use.sw.mpegh.decoder=true
-vendor.audio.volume.headset.gain.depcal=true
-vendor.audio_hal.in_period_size=144
-vendor.audio_hal.period_multiplier=3
-vendor.audio_hal.period_size=192
-vendor.voice.path.for.pcm.voip=true
-vendor.audio.hdr.record.enable=true
-vendor.audio.hw.aac.encoder=true
-vendor.qc2audio.suspend.enabled=true
-vendor.qc2audio.per_frame.flac.dec.enabled=true
-vendor.audio.flac.sw.decoder.24bit=true
-
-# ── Audio Features ────────────────────────────────────────────────────────────
 vendor.audio.feature.a2dp_offload.enable=true
 vendor.audio.feature.afe_proxy.enable=true
 vendor.audio.feature.battery_listener.enable=true
@@ -197,27 +180,28 @@ vendor.audio.feature.src_trkn.enable=true
 vendor.audio.feature.ssrec.enable=true
 vendor.audio.feature.usb_offload_burst_mode.enable=true
 vendor.audio.feature.vbat.enable=true
-vendor.audio.feature.incall_agc.disable=true
-
-# ── Audio Tuning & Calibration ────────────────────────────────────────────────
-persist.vendor.audio.sku=waipio_qrd
-persist.vendor.audio.calfile0=/vendor/etc/acdbdata/waipio_qrd/QRD_acdb_cal.acdb
-persist.vendor.audio.fluence.voicecall=true
-persist.vendor.audio.fluence.voicerec=true
-persist.vendor.audio.fluence.speaker=true
-persist.vendor.audio.fluence.mode=endfire
-persist.vendor.audio.nn.enabled=true
-persist.vendor.audio.nn.ns.enabled=true
-persist.vendor.audio.nn.vad.enabled=true
-persist.vendor.audio.nn.model.dir=/vendor/etc/acdbdata/nn_ns_models
-persist.vendor.audio.feature.ns.enable=true
-
-# ── SoundTrigger & Spatial Audio ──────────────────────────────────────────────
+vendor.audio.flac.sw.decoder.24bit=true
+vendor.audio.hal.boot.timeout.ms=20000
+vendor.audio.hal.output.suspend.supported=true
+vendor.audio.offload.buffer.size.kb=256
+vendor.audio.offload.gapless.enabled=true
+vendor.audio.offload.multiaac.enable=true
+vendor.audio.offload.track.enable=true
+vendor.audio.parser.ip.buffer.size=262144
+vendor.audio.ull_record_period_multiplier=2
+vendor.audio.use.sw.alac.decoder=true
+vendor.audio.use.sw.ape.decoder=true
+vendor.audio.use.sw.mpegh.decoder=true
+vendor.audio.volume.headset.gain.depcal=true
+vendor.audio_hal.in_period_size=144
+vendor.audio_hal.period_multiplier=3
+vendor.audio_hal.period_size=192
+vendor.voice.path.for.pcm.voip=true
+vendor.audio.hdr.record.enable=true
+vendor.audio.hw.aac.encoder=true
 ro.vendor.audio.camera.loopback.support=true
 ro.vendor.audio.feature.spatial=7
 ro.vendor.audio.gain.support=true
-ro.vendor.audio.stereo_master_volume=1
-ro.vendor.audio.support.sound.id=true
 ro.vendor.audio.soundtrigger.appdefine.cnn.level=45
 ro.vendor.audio.soundtrigger.appdefine.gmm.level=65
 ro.vendor.audio.soundtrigger.appdefine.gmm.user.level=55
@@ -230,20 +214,38 @@ ro.vendor.audio.soundtrigger.xatx.cnn.level=95
 ro.vendor.audio.soundtrigger.xatx.gmm.level=54
 ro.vendor.audio.soundtrigger.xatx.gmm.user.level=54
 ro.vendor.audio.soundtrigger.xatx.vop.level=0
+ro.vendor.audio.stereo_master_volume=1
+ro.vendor.audio.support.sound.id=true
+
+# ── Audio Tuning & Calibration ─────────────────────────────────────────────────
+persist.vendor.powerhal.interaction.enable=true
+persist.vendor.powerhal.interaction.duration=30
+persist.vendor.powerhal.interaction.max=1
+persist.vendor.audio.sku=waipio_qrd
+persist.vendor.audio.calfile0=/vendor/etc/acdbdata/waipio_qrd/QRD_acdb_cal.acdb
+persist.vendor.audio.fluence.voicecall=true
+persist.vendor.audio.fluence.voicerec=true
+persist.vendor.audio.fluence.speaker=true
+persist.vendor.audio.fluence.mode=endfire
+persist.vendor.audio.nn.enabled=true
+persist.vendor.audio.nn.ns.enabled=true
+persist.vendor.audio.nn.vad.enabled=true
+persist.vendor.audio.nn.model.dir=/vendor/etc/acdbdata/nn_ns_models
 
 
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 5. BLUETOOTH SUBSYSTEM
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-# ── Device Identification & Power ─────────────────────────────────────────────
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# BLUETOOTH SUBSYSTEM
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+# Device identification & power characteristics
 bluetooth.device.class_of_device=90,2,12
 bluetooth.hardware.power.idle_cur_ma=6
 bluetooth.hardware.power.operating_voltage_mv=3700
 bluetooth.hardware.power.rx_cur_ma=28
 bluetooth.hardware.power.tx_cur_ma=36
 
-# ── Profile Enablement ────────────────────────────────────────────────────────
+# Profile enablement
 bluetooth.profile.a2dp.source.enabled?=true
 bluetooth.profile.asha.central.enabled?=true
 bluetooth.profile.avrcp.target.enabled?=true
@@ -259,26 +261,28 @@ bluetooth.profile.pan.panu.enabled?=true
 bluetooth.profile.pbap.server.enabled?=true
 bluetooth.profile.sap.server.enabled?=true
 
-# ── Advanced Features & Codecs ────────────────────────────────────────────────
+# Advanced features & codec support
 persist.bluetooth.a2dp_offload.disabled=false
-persist.bluetooth.disable.absvol=false
 persist.vendor.bt.aac_frm_ctl.enabled=true
 persist.vendor.bt.aac_vbr_frm_ctl.enabled=true
-persist.vendor.btstack.enable.splita2dp=true
 persist.vendor.qcom.bluetooth.a2dp_offload_cap=sbc-aptx-aptxtws-aptxhd-aac-ldac-aptxadaptiver2
 persist.vendor.qcom.bluetooth.aac_frm_ctl.enabled=true
 persist.vendor.qcom.bluetooth.aptxadaptiver2_1_support=true
 ro.bluetooth.a2dp_offload.supported=true
+vendor.qc2audio.suspend.enabled=true
+vendor.qc2audio.per_frame.flac.dec.enabled=true
+persist.bluetooth.disable.absvol=false
+persist.vendor.btstack.enable.splita2dp=true
 
 
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 6. WIRELESS CONNECTIVITY
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# WIRELESS CONNECTIVITY
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-# ── Wi-Fi ─────────────────────────────────────────────────────────────────────
+# ── Wi-Fi ──────────────────────────────────────────────────────────────────────
 wifi.aware.interface=wifi-aware0
 
-# ── Cellular Radio ────────────────────────────────────────────────────────────
+# ── Cellular Radio ─────────────────────────────────────────────────────────────
 persist.radio.multisim.config=dsds
 persist.vendor.radio.apm_sim_not_pwdn=1
 persist.vendor.radio.custom_ecc=1
@@ -288,27 +292,30 @@ persist.vendor.radio.rat_on=combine
 persist.vendor.radio.sib16_support=1
 ro.telephony.default_network=33,33
 
-# ── RCS ───────────────────────────────────────────────────────────────────────
+# ── RCS (Rich Communication Services) ──────────────────────────────────────────
 persist.vendor.rcs.singlereg.feature=1
 
 
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 7. CAMERA SUBSYSTEM
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# CAMERA SUBSYSTEM
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+# Applications excluded from auxiliary camera access
 vendor.camera.aux.packageexcludelist=org.telegram.messenger,org.thunderdog.challegram,us.zoom.videomeetings
 persist.vendor.camera.privapp.list=org.lineageos.aperture,com.oplus.camera,com.ss.android.ugc.aweme,org.codeaurora.snapcam
 
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# SENSORS
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 8. SENSORS
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 persist.vendor.sensors.debug.hal=0
 persist.vendor.sensors.enable.mag_filter=true
 
 
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 9. USB SUBSYSTEM
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# USB SUBSYSTEM
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 sys.usb.mtp.batchcancel=1
 vendor.usb.controller=a600000.dwc3
 vendor.usb.diag.func.name=ffs
@@ -321,122 +328,163 @@ vendor.usb.use_ffs_mtp=1
 vendor.usb.use_gadget_hal=1
 
 
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 10. MEDIA & CODEC ENGINE
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# MEDIA & CODEC ENGINE
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-# ── Core Media Framework ──────────────────────────────────────────────────────
+# Core media framework
 debug.c2.use_dmabufheaps=1
 debug.media.codec2=2
-debug.media.recorder.max_base_layer_fps=60
-debug.media.swcodec.priority=1
 debug.stagefright.c2inputsurface=-1
 debug.stagefright.ccodec=4
-debug.stagefright.ccodec_delayed_params=0
-debug.stagefright.ccodec_timeout_mult=1000
 debug.stagefright.omx_default_rank=0
-media.c2.dmabuf.padding=512
-media.stagefright.audio.deep=false
-media.stagefright.enable-http=true
-media.stagefright.enable-player=true
 media.stagefright.thumbnail.prefer_hw_codecs=true
-vendor.media.enable.frame_drop=false
-vendor.media.target.version=3
-vendor.mm.enable.qcom_parser=4044018
-
-# ── Transcoding ───────────────────────────────────────────────────────────────
+debug.media.recorder.max_base_layer_fps=60
+vendor.vidc.enc.disable.pq=true
+ro.vendor.media.video.frc.enable=false
+ro.vendor.media.video.vpp.enable=false
+debug.stagefright.ccodec_delayed_params=0
+media.c2.dmabuf.padding=512
 debug.media.transcoding.codec_max_operating_rate_720P=480
 debug.media.transcoding.codec_max_operating_rate_1080P=240
 debug.media.transcoding.codec_max_operating_rate_2160P=120
+vendor.media.target.version=3
 debug.media.transcoding.fps_min_above_720P=30
 debug.media.transcoding.fps_threshold=60
+vendor.vidc.dec.enable.downscalar=0
 debug.media.transcoding.target_bitrate_720P=5000000
 debug.media.transcoding.target_bitrate_1080P=10000000
 debug.media.transcoding.target_bitrate_2160P=20000000
+debug.stagefright.ccodec_timeout_mult=1000
+media.stagefright.audio.deep=false
+debug.media.swcodec.priority=1
+media.stagefright.enable-http=true
+media.stagefright.enable-player=true
+vendor.media.enable.frame_drop=false
 
-# ── Video Codec ───────────────────────────────────────────────────────────────
-ro.vendor.media.video.frc.enable=false
-ro.vendor.media.video.vpp.enable=false
-vendor.vidc.dec.enable.downscalar=0
-vendor.vidc.enc.disable.pq=true
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# MEMORY MANAGEMENT & LOW MEMORY KILLER
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+# Dalvik heap configuration
+dalvik.vm.heapstartsize=16m
+dalvik.vm.heapgrowthlimit=256m
+dalvik.vm.heapsize=512m
+dalvik.vm.heaptargetutilization=0.75
+dalvik.vm.heapminfree=2m
+dalvik.vm.heapmaxfree=8m
+
+# Background app limits & ZRAM tuning
+ro.sys.fw.bg_apps_limit=28
+ro.zram.mark_idle_delay_mins=60
+ro.zram.first_wb_delay_mins=1440
+ro.zram.periodic_wb_delay_hours=24
 
 
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 13. PERFORMANCE & SCROLL OPTIMIZATION
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# Asset management
+persist.sys.purgeable_assets=1
 
-# ── Scroll / Fling Physics ────────────────────────────────────────────────────
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# DEX OPTIMIZATION & ART RUNTIME
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+dalvik.vm.systemservercompilerfilter=speed
+dalvik.vm.dex2oat-flags=--no-watch-dog
+dalvik.vm.image-dex2oat-filter=speed
+dalvik.vm.dex2oat-filter=speed
+dalvik.vm.minidebuginfo=false
+dalvik.vm.dex2oat-minidebuginfo=false
+dalvik.vm.dex2oat64.enabled=true
+dalvik.vm.usejitprofiles=true
+dalvik.vm.jitprofile_saver=true
+
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# PERFORMANCE & SCROLL OPTIMIZATION
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+# Scroll/fling physics
 ro.min.fling_velocity=160
 ro.max.fling_velocity=20000
 
-# ── QTI Performance Services ──────────────────────────────────────────────────
-ro.vendor.extension_library=libqti-perfd-client.so
-vendor.pasr.activemode.enabled=false
-vendor.pasr.enabled=false
-vendor.perf.framepacing.enable=1
+# QTI performance services
+ro.vendor.qti.sys.fw.bservice_enable=true
+ro.vendor.qti.sys.fw.bservice_limit=10
+ro.vendor.qti.sys.fw.bservice_age=5000
 ro.vendor.perf.scroll_opt=true
 ro.vendor.qti.cgroup_follow.enable=true
-ro.vendor.qti.sys.fw.bservice_enable=true
-ro.vendor.qti.sys.fw.bservice_age=5000
-ro.vendor.qti.sys.fw.bservice_limit=10
-persist.vendor.powerhal.interaction.enable=true
-persist.vendor.powerhal.interaction.duration=30
-persist.vendor.powerhal.interaction.max=1
+ro.vendor.extension_library=libqti-perfd-client.so
 
 
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 14. SECURITY & DRM
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# SECURITY & DRM
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 drm.service.enabled=true
 vendor.gatekeeper.disable_spu=true
 
 
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 15. FILESYSTEM & STORAGE
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# FILESYSTEM & STORAGE
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 persist.sys.fuse.passthrough.enable=true
 
 
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 16. DEVICE POWER MANAGEMENT (DPM)
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# DEVICE POWER MANAGEMENT (DPM)
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 persist.vendor.dpm.vndr.feature=11
 persist.vendor.dpm.vndr.halservice.enable=1
 persist.vendor.dpm.vndr.idletimer.mode=default
+#persist.vendor.dpm.vndr.tcm=2
 
+# ------------------------------------------------------------------------------
+# Core Goodix Fingerprint HAL (Accuracy > Speed)
+# ------------------------------------------------------------------------------
 
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 17. FINGERPRINT (GOODIX UDFPS)
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-# ── Core HAL (Accuracy > Speed) ───────────────────────────────────────────────
 persist.vendor.goodix.fp.wakeup=true
-persist.vendor.goodix.fp.retry_enable=1
-persist.vendor.goodix.fp.match_timeout=999
-persist.vendor.goodix.fp.enroll_timeout=999
+persist.vendor.goodix.fp.retry_enable=1           # must be enabled
+persist.vendor.goodix.fp.match_timeout=999        # increase timeout to allow multiple retries
+persist.vendor.goodix.fp.enroll_timeout=999       # optional, allows longer enrollment
 persist.vendor.goodix.fp.partial_allow=1
 
-# ── Optical UDFPS ─────────────────────────────────────────────────────────────
+# ------------------------------------------------------------------------------
+# Optical UDFPS Image Quality (MOST IMPORTANT)
+# ------------------------------------------------------------------------------
+
 persist.vendor.goodix.udfps.enable=true
 
-# ── Debug (Disabled for Best Accuracy) ────────────────────────────────────────
+# ------------------------------------------------------------------------------
+# AOD / Screen-Off Accuracy (Doze Reliability)
+# ------------------------------------------------------------------------------
+
+persist.vendor.goodix.fp.aod_enable=1
+
+# ------------------------------------------------------------------------------
+# Debug (Keep Disabled for Best Accuracy)
+# ------------------------------------------------------------------------------
+
 persist.vendor.goodix.fp.debug=0
 persist.vendor.udfps.debug=0
 
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# SYSTEM IDENTIFICATION & VENDOR PROPERTIES
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 18. SYSTEM IDENTIFICATION & VENDOR PROPERTIES
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ro.vendor.qti.va_aosp.support=1
 
-# ── IMS Logging Control ──────────────────────────────────────────────────────
+# ── IMS Logging Control ────────────────────────────────────────────────────────
 persist.vendor.ims.disableADBLogs=1
 persist.vendor.ims.disableDebugLogs=1
 persist.vendor.ims.disableIMSLogs=1
 persist.vendor.ims.disableQXDMLogs=1
 
+vendor.mm.enable.qcom_parser=4044018
 
-# =========================================================
-# MEMORY / ACTIVITY MANAGER (SM8450 OPTIMIZED)
-# =========================================================
-ro.sys.fw.bg_apps_limit=16
+# Disable voice AGC / automatic gain
+vendor.audio.feature.incall_agc.disable=true
+persist.vendor.audio.feature.ns.enable=true

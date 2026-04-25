@@ -40,13 +40,6 @@ prebuilt_etc {
 }
 
 prebuilt_etc {
-    name: "init.oplus_sm8450.rc",
-    src: "init.oplus_sm8450.rc",
-    sub_dir: "init",
-    recovery: true,
-}
-
-prebuilt_etc {
     name: "init.qcom.recovery.rc",
     src: "init.qcom.recovery.rc",
     sub_dir: "init",
@@ -100,5 +93,10 @@ sh_binary {
 sh_binary {
     name: "init.qcom.sh",
     src: "init.qcom.sh",
+    vendor: true,
+}
+prebuilt_etc {
+    name: "fstab.zram",
+    src: "fstab.zram",
     vendor: true,
 }

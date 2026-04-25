@@ -65,23 +65,8 @@ function configure_memory_parameters() {
 		echo 128000 > /proc/boost_pool/camera_pages
 	fi
 
-	# Configure zswap as compressed L1 cache before pages spill to zram.
-	if [ -f /sys/module/zswap/parameters/compressor ]; then
-		echo lz4 > /sys/module/zswap/parameters/compressor
-	fi
-	if [ -f /sys/module/zswap/parameters/zpool ]; then
-		echo zsmalloc > /sys/module/zswap/parameters/zpool
-	fi
-	if [ -f /sys/module/zswap/parameters/enabled ]; then
-		echo 1 > /sys/module/zswap/parameters/enabled
-	fi
-	if [ -f /sys/module/zswap/parameters/max_pool_percent ]; then
-		echo 50 > /sys/module/zswap/parameters/max_pool_percent
-	fi
-
 	configure_read_ahead_kb_values
-	echo 0 > /proc/sys/vm/page-cluster
-	echo 160 > /proc/sys/vm/swappiness
+	echo 100 > /proc/sys/vm/swappiness
 
 	# Disable periodic kcompactd wakeups. We do not use THP, so having many
 	# huge pages is not as necessary.
