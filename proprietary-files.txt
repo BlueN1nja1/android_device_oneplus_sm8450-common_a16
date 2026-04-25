@@ -191,11 +191,8 @@ system/lib/liboplusmmdebug.so
 # =============================================================================
 odm/etc/acdbdata/acdb_cal.acdb
 odm/etc/acdbdata/Audio_Parameter_Version.txt
-odm/etc/acdbdata/EU/acdb_cal.acdb
 odm/etc/acdbdata/FTM/acdb_cal.acdb
 odm/etc/acdbdata/FTM/workspaceFileXml.qwsp
-odm/etc/acdbdata/ORANGE/acdb_cal.acdb
-odm/etc/acdbdata/VDF/acdb_cal.acdb
 vendor/etc/acdbdata/waipio_cdp/CDP_acdb_cal.acdb
 vendor/etc/acdbdata/waipio_cdp/CDP_workspaceFileXml.qwsp
 vendor/etc/acdbdata/waipio_mtp/MTP_acdb_cal.acdb
@@ -222,11 +219,14 @@ vendor/lib64/libbtnv.so
 vendor/lib64/libsoc_helper.so
 vendor/lib64/vendor.qti.hardware.bluetooth_sar@1.0.so
 vendor/lib64/vendor.qti.hardware.bluetooth_sar@1.1.so
-odm/etc/bt/hpnv20.bin
 odm/etc/bt/hpnv21_ch1.bin
-odm/etc/bt/hpnv21.bin
+odm/etc/bt/hpnv21_eu.bin
 odm/etc/bt/hpnv21g_ch1.bin
-odm/etc/bt/hpnv21g.bin
+odm/etc/bt/hpnv21g_eu.bin
+odm/etc/bt/hpnv21_na.bin
+odm/etc/bt/hpnv21g_na.bin
+odm/etc/bt/hpnv21_in.bin
+odm/etc/bt/hpnv21g_in.bin
 
 # =============================================================================
 # 🧮 CDSP — Compute DSP Runtime & RPC Libraries
