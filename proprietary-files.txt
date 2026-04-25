@@ -1366,9 +1366,7 @@ vendor/etc/init/init_thermal-engine-v2.rc
 vendor/etc/thermal-engine.conf
 vendor/etc/init/android.hardware.thermal@2.0-service.qti-v2.rc
 odm/etc/ThermalServiceConfig/sys_thermal_config.xml
-odm/etc/temperature_profile/sys_high_temp_protect_realme_216AC.xml
 odm/etc/temperature_profile/sys_thermal_control_config.xml
-odm/etc/temperature_profile/sys_thermal_control_config_gt.xml
 vendor/bin/hw/android.hardware.thermal@2.0-service.qti-v2
 vendor/etc/vintf/manifest/android.hardware.thermal@2.0-service.qti.xml
 
