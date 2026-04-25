@@ -65,8 +65,8 @@ blob_fixups: blob_fixups_user_type = {
         .replace_needed('libprotobuf-cpp-full.so', 'libprotobuf-cpp-full-21.7.so')
         .replace_needed('libprotobuf-cpp-lite.so', 'libprotobuf-cpp-lite-21.7.so'),
     'system_ext/lib64/libwfdnative.so': blob_fixup()
-        .add_needed('libinput_shim.so'),
-        .add_needed('libbinder_shim.so')
+        .add_needed('libinput_shim.so')
+        .add_needed('libbinder_shim.so'),
     'system_ext/lib64/libwfdmmsrc_system.so': blob_fixup()
         .add_needed('libgui_shim.so'),
         .replace_needed('android.hidl.base@1.0.so', 'libhidlbase.so'),
