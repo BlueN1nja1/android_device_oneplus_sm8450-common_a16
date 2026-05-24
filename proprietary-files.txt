@@ -327,19 +327,14 @@ vendor/lib64/libsnapdragoncolor-manager.so
 vendor/lib64/libsnapdragoncolor-qdcm.so
 
 # For test service
-odm/bin/hw/android.hardware.ir-service
 vendor/bin/hw/vendor.qti.hardware.secureprocessor@1.0
 odm/bin/hw/vendor.oplus.hardware.fido.fido2ca@1.0-service
 odm/bin/oplus_performance.sh
 odm/etc/init/android.hardware.ir-service.rc
 vendor/etc/init/vendor.qti.hardware.secureprocessor@1.0.rc
 odm/etc/init/oplus_performance.rc
-odm/etc/init/vendor.oplus.hardware.fido.fido2ca@1.0-service.rc
 odm/etc/permissions/vendor-oplus-hardware-biometrics-fido2.xml
 odm/etc/permissions/com.oplus.features_power.xml
-odm/etc/vintf/manifest/manifest_oplus_fido2.xml
-odm/etc/vintf/manifest/android.hardware.ir-service.xml
-odm/etc/ueventd.rc
 odm/lib64/android.hardware.ir-V1-ndk_platform.so
 odm/lib64/hw/vendor.pixelworks.hardware.display@1.0-impl-1.2.so
 odm/lib64/hw/libbinaural_record_dolby-2.0.so
