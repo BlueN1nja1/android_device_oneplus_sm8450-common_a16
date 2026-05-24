@@ -327,15 +327,8 @@ vendor/lib64/libsnapdragoncolor-manager.so
 vendor/lib64/libsnapdragoncolor-qdcm.so
 
 # For test service
-vendor/bin/hw/vendor.qti.hardware.secureprocessor@1.0
 odm/bin/oplus_performance.sh
-vendor/etc/init/vendor.qti.hardware.secureprocessor@1.0.rc
 odm/etc/init/oplus_performance.rc
-odm/lib64/android.hardware.ir-V1-ndk_platform.so
-odm/lib64/hw/vendor.pixelworks.hardware.display@1.0-impl-1.2.so
-odm/lib64/hw/libbinaural_record_dolby-2.0.so
-vendor/lib64/vendor.pixelworks.hardware.feature@1.1.so
-vendor/lib64/vendor.pixelworks.hardware.feature-V1-ndk_platform.so
 
 # Display (Pixelworks)
 odm/bin/hw/vendor.pixelworks.hardware.display.iris-service
