@@ -61,16 +61,4 @@
         <item>0:2:15</item> <!-- ID0:Fingerprint:Strong -->
     </string-array>
 
-     <!-- Whether device has VOOC charging support -->
-    <bool name="config_hasVoocCharger">true</bool>
-
-    <string-array name="config_oemFastChargerStatusPaths" translatable="false">
-         <item>/sys/class/oplus_chg/battery/fast_charge;1</item>
-         <item>/sys/class/oplus_chg/battery/voocchg_ing;1</item>
-    </string-array>
-
-    <bool name="config_useRotationSuggestions">false</bool>
-    <bool name="config_enableRotationSuggestion">false</bool>
-
-
 </resources>

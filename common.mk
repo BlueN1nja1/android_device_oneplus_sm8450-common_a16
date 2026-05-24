@@ -10,7 +10,6 @@ $(call inherit-product, hardware/qcom-caf/common/common.mk)
 # A/B
 $(call inherit-product, $(SRC_TARGET_DIR)/product/generic_ramdisk.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/launch_with_vendor_ramdisk.mk)
-$(call soong_config_set,libcameraservice,ext_lib,//$(LOCAL_PATH):libcameraservice_extension.oneplus_sm8450)
 
 AB_OTA_POSTINSTALL_CONFIG += \
     RUN_POSTINSTALL_system=true \
@@ -27,9 +26,6 @@ AB_OTA_POSTINSTALL_CONFIG += \
 PRODUCT_PACKAGES += \
     checkpoint_gc \
     otapreopt_script
-
-PRODUCT_VENDOR_PROPERTIES += \
-    vendor.display.vds_allow_hwc=1
 
 # Audio
 PRODUCT_PACKAGES += \
@@ -98,6 +94,7 @@ PRODUCT_PACKAGES += \
 # Camera
 PRODUCT_PACKAGES += \
     vendor.oplus.hardware.performance-service
+$(call soong_config_set,libcameraservice,ext_lib,//$(LOCAL_PATH):libcameraservice_extension.oneplus_sm8450)
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.camera.concurrent.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.concurrent.xml \
@@ -106,29 +103,11 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.camera.full.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.full.xml \
     frameworks/native/data/etc/android.hardware.camera.raw.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.raw.xml
 
-# Cgroup and task_profiles
-PRODUCT_COPY_FILES += \
-    system/core/libprocessgroup/profiles/cgroups.json:$(TARGET_COPY_OUT_VENDOR)/etc/cgroups.json \
-    system/core/libprocessgroup/profiles/task_profiles.json:$(TARGET_COPY_OUT_VENDOR)/etc/task_profiles.json
-
 # Dalvik
 $(call inherit-product, frameworks/native/build/phone-xhdpi-6144-dalvik-heap.mk)
 
 # DebugFS
 PRODUCT_SET_DEBUGFS_RESTRICTIONS := true
-
-PRODUCT_DEX_PREOPT_DEFAULT_COMPILER_FILTER := everything
-
-PRODUCT_SYSTEM_PROPERTIES += \
-    dalvik.vm.dex2oat-filter=everything \
-    dalvik.vm.image-dex2oat-filter=everything
-
-PRODUCT_DEXPREOPT_SPEED_APPS += \
-    Launcher3QuickStep \
-    Settings \
-    SettingsGoogle \
-    SystemUI \
-    SystemUIGoogle
 
 # Display
 PRODUCT_PACKAGES += \
@@ -164,6 +143,13 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.location.gps.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.location.gps.xml
 
+# GPU Boost
+GPU_FREQS_PATH := /sys/class/kgsl/kgsl-3d0/devfreq/available_frequencies
+GPU_MIN_FREQ_PATH := /sys/class/kgsl/kgsl-3d0/devfreq/min_freq
+
+PERF_GOV_SUPPORTED := true
+PERF_DEFAULT_GOV := walt
+
 # Graphics
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.opengles.aep.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.opengles.aep.xml \
@@ -180,7 +166,7 @@ PRODUCT_PACKAGES += \
 
 # Hotword enrollment
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/privapp-permissions-hotword.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/privapp-permissions-hotword.xml
+    $(LOCAL_PATH)/configs/permissions/privapp-permissions-hotword.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/privapp-permissions-hotword.xml
 
 # IPACM
 PRODUCT_PACKAGES += \
@@ -191,7 +177,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     fstab.qcom \
     fstab.qcom.vendor_ramdisk \
-    fstab.zram \
     init.class_main.sh \
     init.kernel.post_boot-cape.sh \
     init.kernel.post_boot-taro.sh \
@@ -205,18 +190,10 @@ PRODUCT_PACKAGES += \
     init.qcom.usb.rc \
     init.qcom.usb.sh \
     init.target.rc \
-    init.oplus_sm8450.rc \
     ueventd.oplus.rc \
     ueventd.qcom.rc
 
 $(call soong_config_set,libinit,vendor_init_lib,//$(LOCAL_PATH):libinit_oplus)
-
-# GPU Boost
-GPU_FREQS_PATH := /sys/class/kgsl/kgsl-3d0/devfreq/available_frequencies
-GPU_MIN_FREQ_PATH := /sys/class/kgsl/kgsl-3d0/devfreq/min_freq
-
-PERF_GOV_SUPPORTED := true
-PERF_DEFAULT_GOV := walt
 
 # Kernel
 PRODUCT_ENABLE_UFFD_GC := false
@@ -225,10 +202,11 @@ PRODUCT_ENABLE_UFFD_GC := false
 PRODUCT_PACKAGES += \
     vendor.lineage.health-service.default
 
+$(call soong_config_set,lineage_health,charging_control_charging_path,/sys/class/oplus_chg/battery/mmi_charging_enable)
+
 # LiveDisplay
 PRODUCT_PACKAGES += \
     vendor.lineage.livedisplay-service.oplus
-
 $(call soong_config_set,lineage_health,charging_control_charging_path,/sys/class/oplus_chg/battery/mmi_charging_enable)
 
 # Media
@@ -239,8 +217,6 @@ PRODUCT_COPY_FILES += \
 
 # OSENSE
 PRODUCT_PACKAGES += \
-    liboplus-uah-client \
-    vendor.oplus.hardware.commondcs-service \
     vendor.oplus.hardware.osense.client-service
 
 # Overlays
@@ -268,19 +244,9 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
-# Display
-$(call soong_config_set,surfaceflinger,frame_rate_category_high,120)
-$(call soong_config_set,surfaceflinger,frame_rate_category_min,60)
-
-$(call soong_config_set, android_hardware_audio, run_64bit, true)
-
 # Power
 PRODUCT_PACKAGES += \
-    android.hardware.power-service.lineage-libperfmgr \
-    libqti-perfd-client
-
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/powerhint.json:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.json
+    android.hardware.power-service-qti
 
 $(call soong_config_set,qtipower,tap_to_wake_node,/proc/touchpanel/double_tap_enable)
 
@@ -291,12 +257,11 @@ PRODUCT_PACKAGES += \
 # Sensors
 PRODUCT_PACKAGES += \
     android.hardware.sensors-service.oplus-multihal \
-    android.hardware.sensors@2.1-service.multihal \
     sensors.dynamic_sensor_hal \
     sensors.oplus
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/hals.conf:$(TARGET_COPY_OUT_VENDOR)/etc/sensors/hals.conf
+    $(LOCAL_PATH)/configs/sensors/hals.conf:$(TARGET_COPY_OUT_VENDOR)/etc/sensors/hals.conf
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.sensor.accelerometer.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.accelerometer.xml \
@@ -318,14 +283,7 @@ PRODUCT_SHIPPING_API_LEVEL := $(BOARD_SHIPPING_API_LEVEL)
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
     $(LOCAL_PATH) \
-    hardware/oplus \
-    hardware/xiaomi \
-    hardware/google/interfaces \
-    hardware/google/pixel \
-    hardware/lineage/interfaces/power-libperfmgr \
-    hardware/qcom-caf/common/libqti-perfd-client \
-    vendor/qcom/opensource/usb/etc
-
+    hardware/oplus
 
 # Storage
 $(call inherit-product, $(SRC_TARGET_DIR)/product/emulated_storage.mk)
@@ -398,14 +356,22 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.verified_boot.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.verified_boot.xml
 
 # Vibrator
-$(call soong_config_set_bool,OPLUS_LINEAGE_VIBRATOR_HAL,USE_EFFECT_STREAM,true)
-$(call soong_config_set,OPLUS_LINEAGE_VIBRATOR_HAL,INCLUDE_DIR,$(LOCAL_PATH)/vibrator/include)
+$(call soong_config_set,OPLUS_LINEAGE_VIBRATOR_HAL,USE_EFFECT_STREAM,true)
 
 PRODUCT_PACKAGES += \
     vendor.qti.hardware.vibrator.service.oplus
 
 PRODUCT_COPY_FILES += \
     vendor/qcom/opensource/vibrator/excluded-input-devices.xml:$(TARGET_COPY_OUT_VENDOR)/etc/excluded-input-devices.xml
+
+# VINTF
+DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE += \
+    hardware/oplus/vintf/device_framework_matrix.xml \
+    hardware/qcom-caf/common/vendor_framework_compatibility_matrix.xml
+DEVICE_FRAMEWORK_MANIFEST_FILE += $(COMMON_PATH)/framework_manifest.xml
+DEVICE_MATRIX_FILE := hardware/qcom-caf/common/compatibility_matrix.xml
+DEVICE_MANIFEST_FILE := $(LOCAL_PATH)/vintf/manifest.xml
+ODM_MANIFEST_FILES := $(LOCAL_PATH)/vintf/manifest_odm.xml
 
 # WiFi
 PRODUCT_PACKAGES += \
