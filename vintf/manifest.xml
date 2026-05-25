@@ -65,6 +65,10 @@
         </interface>
         <fqname>@1.0::IGatekeeper/default</fqname>
     </hal>
+    <hal format="aidl">
+        <name>android.hardware.graphics.composer3</name>
+        <fqname>IComposer/default</fqname>
+    </hal>
     <hal format="hidl">
         <name>android.hardware.keymaster</name>
         <transport>hwbinder</transport>

@@ -1229,10 +1229,10 @@ vendor/etc/init/init.time_daemon.rc
 vendor/lib64/libtime_genoff.so
 
 # Touchscreen firmware
-odm/firmware/tp/21631/FW_S3908_SAMSUNG.img
-odm/firmware/tp/21631/FW_S3908_SAMSUNG_FAE.img
-odm/firmware/tp/21631/LIMIT_S3908_SAMSUNG.img
-odm/firmware/tp/21631/LIMIT_S3908_SAMSUNG_AGING.img
+odm/firmware/tp/21001/FW_S3908_SAMSUNG.img
+odm/firmware/tp/21001/FW_S3908_SAMSUNG_FAE.img
+odm/firmware/tp/21001/LIMIT_S3908_SAMSUNG.img
+odm/firmware/tp/21001/LIMIT_S3908_SAMSUNG_AGING.img
 
 # Trusted Execution Environment connector
 vendor/bin/hw/vendor.qti.hardware.qteeconnector@1.0-service
