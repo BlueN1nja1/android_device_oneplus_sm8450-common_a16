@@ -102,6 +102,14 @@ vendor/lib/rfsa/adsp/libtracker_6dof_skel_8350.so
 vendor/lib/rfsa/adsp/libvpp_ais_networks
 vendor/lib/rfsa/adsp/libvpp_vqa_networks
 vendor/lib/rfsa/adsp/libvpt_action_recognition
+vendor/firmware_mnt/image/adsp.b00
+vendor/firmware_mnt/image/adsp.mdt
+vendor/firmware_mnt/image/cdsp.b00
+vendor/firmware_mnt/image/cdsp.mdt
+vendor/firmware_mnt/image/modem.b00
+vendor/firmware_mnt/image/modem.mdt
+vendor/firmware_mnt/image/slpi.b00
+vendor/firmware_mnt/image/slpi.mdt
 
 # ANT+
 vendor/lib64/hw/com.dsi.ant@1.0-impl.so
