@@ -1,5 +1,5 @@
 ## All proprietary files from this list, unless pinned and noted otherwise, are
-## from OnePlus 10 Pro 5G (NE2211_15.0.0.901(EX01))).
+## from OnePlus 10 Pro 5G (NE2211_16.0.3.520(EX01))).
 
 # ACDBs
 vendor/etc/acdbdata/nn_ns_models/fai__2.0.0_0.1__3.0.0_0.0__eai_1.36_enpu2.pmd
@@ -8,6 +8,8 @@ vendor/etc/acdbdata/nn_ns_models/fai__2.3.0_0.1__3.0.0_0.0__eai_1.36_enpu2_comp.
 vendor/etc/acdbdata/nn_ns_models/fai__2.7.20_0.0__3.0.0_0.0__eai_1.36_enpu2.pmd
 vendor/etc/acdbdata/nn_ns_models/fai__2.7.2_0.0__3.0.0_0.0__eai_1.36_enpu2.pmd
 vendor/etc/acdbdata/nn_vad_models/fai__3.0.0_0.0__eai_1.36_enpu2.pmd
+vendor/etc/acdbdata/waipio_mtp/MTP_acdb_cal.acdb
+vendor/etc/acdbdata/waipio_mtp/MTP_workspaceFileXml.qwsp
 
 # ADSP
 vendor/bin/adsprpcd
@@ -169,7 +171,6 @@ system/lib64/libziparchive.so:odm/lib64/libziparchive_odm.so;FIX_SONAME
 odm/bin/hw/vendor.oplus.hardware.charger-V10-service
 odm/etc/init/vendor.oplus.hardware.charger-V10-service.rc
 odm/etc/vintf/manifest/manifest_oplus_charger_aidl.xml
-odm/firmware/fastchg/charge_time_config.csv
 odm/firmware/fastchg/charging_thermal_config_default.txt
 odm/lib64/libGaiaClient_vnd.so
 odm/lib64/vendor.oplus.hardware.charger-V10-ndk_platform.so
@@ -324,33 +325,30 @@ vendor/lib64/libhdrdynamicootf.so
 # Display (HWC)
 vendor/bin/qdcmss
 vendor/etc/init/qdcmss.rc
-vendor/etc/snapdragon_color_libs_config.xml
 vendor/lib64/libdpps.so
 vendor/lib64/libgame_enhance.so
 vendor/lib64/libmemutils.so
 vendor/lib64/libqdcm-algo.so
 vendor/lib64/libqdcm-json-mode-parser.so
 vendor/lib64/libqdcm-mode-parser.so
-vendor/lib64/libsnapdragoncolor-manager.so
-vendor/lib64/libsnapdragoncolor-qdcm.so
 
 # For test service
 odm/bin/oplus_performance.sh
 odm/etc/init/oplus_performance.rc
 
 # Display (Pixelworks)
-odm/bin/hw/vendor.pixelworks.hardware.display.iris-service
-odm/bin/hw/vendor.pixelworks.hardware.feature.irisfeature-service
-odm/bin/irisConfig
-odm/etc/init/vendor.pixelworks.hardware.feature.irisfeature-service.rc
+#odm/bin/hw/vendor.pixelworks.hardware.display.iris-service
+#odm/bin/hw/vendor.pixelworks.hardware.feature.irisfeature-service
+#odm/bin/irisConfig
+#odm/etc/init/vendor.pixelworks.hardware.feature.irisfeature-service.rc
 odm/etc/vintf/manifest/vendor.pixelworks.hardware.display.iris-service.xml
 odm/etc/vintf/manifest/vendor.pixelworks.hardware.feature.irisfeature-service.xml
-odm/lib64/libpwirisIoctlWrapper.so
-odm/lib64/libpwiriscalibrate.so
-odm/lib64/libpwirisservice.so
-odm/lib64/libpwirissoft.so
+#odm/lib64/libpwirisIoctlWrapper.so
+#odm/lib64/libpwiriscalibrate.so
+#odm/lib64/libpwirisservice.so
+#odm/lib64/libpwirissoft.so
 odm/lib64/libpwsoftirisPCS.so
-odm/lib64/libsnapdragoncolor-pxlw.so
+#odm/lib64/libsnapdragoncolor-pxlw.so
 vendor/lib64/libpwirisfeature.so
 vendor/lib64/libpwirishalwrapper.so
 vendor/lib64/vendor.pixelworks.hardware.feature@1.0.so
@@ -360,7 +358,7 @@ vendor/lib64/vendor.pixelworks.hardware.display@1.2.so
 
 # Display (SDM) - from ingot
 vendor/lib64/libdisplayskuutils.so
-vendor/lib64/libsdmextension.so
+#vendor/lib64/libsdmextension.so
 
 # Display (SDM)
 vendor/etc/display/DPU660.xml
@@ -387,9 +385,7 @@ vendor/lib64/libtinyxml2_1.so
 
 # Display calibration data
 vendor/etc/display/qdcm_calib_data_samsung_S6E3HC3_dsc_cmd_mode_panel.json
-vendor/etc/display/qdcm_calib_data_samsung_S6E3HC3_dsc_cmd_mode_panel_21631.json
 vendor/etc/ltm_config_samsung_S6E3HC3_dsc_cmd_mode_panel.xml
-vendor/etc/ltm_config_samsung_S6E3HC3_dsc_cmd_mode_panel_21631.xml
 
 # Display postprocessing
 vendor/bin/hw/vendor.display.color@1.0-service
@@ -591,9 +587,7 @@ my_product/priv-app/HotwordEnrollmentYGoogleHEXAGON_WIDEBAND.apk:product/priv-ap
 
 # IMS
 system/lib64/vendor.qti.diaghal-V1-ndk.so:system_ext/lib64/vendor.qti.diaghal-V1-ndk.so
-system_ext/app/ImsRcsService/ImsRcsService.apk
 system_ext/etc/permissions/telephony_system-ext_privapp-permissions-qti.xml
-system_ext/etc/permissions/vendor.qti.ims.rcsservice.xml
 system_ext/etc/sysconfig/qti_telephony_system_packages_config.xml
 system_ext/etc/sysconfig/qti_whitelist_system_ext.xml
 system_ext/framework/oplus-ims-ext.jar

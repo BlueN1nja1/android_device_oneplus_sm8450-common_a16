@@ -4,6 +4,9 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
+import os
+import atexit
+
 from extract_utils.fixups_blob import (
     blob_fixup,
     blob_fixups_user_type,
@@ -12,6 +15,7 @@ from extract_utils.fixups_lib import (
     lib_fixups,
     lib_fixups_user_type,
 )
+
 from extract_utils.main import (
     ExtractUtils,
     ExtractUtilsModule,
@@ -48,6 +52,9 @@ lib_fixups: lib_fixups_user_type = {
 }
 
 blob_fixups: blob_fixups_user_type = {
+    'vendor/bin/hw/vendor.qti.hardware.display.composer-service': blob_fixup()
+        .replace_needed('vendor.qti.hardware.display.config-V5-ndk_platform.so', 'vendor.qti.hardware.display.config-V5-ndk.so')
+        .replace_needed('android.hardware.common-V2-ndk_platform.so', 'android.hardware.common-V2-ndk.so'),
     'odm/bin/hw/vendor.oplus.hardware.charger-V10-service': blob_fixup()
         .add_needed('libbase_shim.so')
         .replace_needed('vendor.oplus.hardware.osense.client-V1-ndk_platform.so', 'vendor.oplus.hardware.osense.client-V1-ndk.so'),
@@ -94,7 +101,6 @@ blob_fixups: blob_fixups_user_type = {
     'vendor/lib64/vendor.libdpmframework.so': blob_fixup()
         .add_needed('libhidlbase_shim.so'),
 }  # fmt: skip
-
 module = ExtractUtilsModule(
     'sm8450-common',
     'oneplus',
@@ -102,6 +108,39 @@ module = ExtractUtilsModule(
     lib_fixups=lib_fixups,
     namespace_imports=namespace_imports,
 )
+
+def patch_vendor_bp():
+    print("\nApplying memory tagging bypasses to Android.bp...")
+
+    # Resolve absolute path to the generated common Android.bp
+    workspace_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..'))
+    bp_path = os.path.join(workspace_root, 'vendor', 'oneplus', 'sm8450-common', 'Android.bp')
+
+    if os.path.isfile(bp_path):
+        with open(bp_path, 'r') as f:
+            content = f.read()
+
+        # Inject Scudo TBI bypass for QSEECOM
+        qseecom_target = 'name: "vendor.qti.hardware.qseecom@1.0-service",'
+        if qseecom_target in content and 'memtag_heap: false' not in content:
+            qseecom_patch = qseecom_target + '\n    sanitize: {\n        memtag_heap: false,\n    },'
+            content = content.replace(qseecom_target, qseecom_patch)
+
+        # Inject Scudo TBI bypass for Keymint
+        keymint_target = 'name: "android.hardware.security.keymint-service-qti",'
+        if keymint_target in content and 'memtag_heap: false' not in content:
+            keymint_patch = keymint_target + '\n    sanitize: {\n        memtag_heap: false,\n    },'
+            content = content.replace(keymint_target, keymint_patch)
+
+        with open(bp_path, 'w') as f:
+            f.write(content)
+
+        print("Successfully patched sm8450-common vendor tree!")
+    else:
+        print(f"Warning: Could not find Android.bp at {bp_path}")
+
+# Register the hook to run right as the script exits
+atexit.register(patch_vendor_bp)
 
 if __name__ == '__main__':
     utils = ExtractUtils.device(module)
