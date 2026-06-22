@@ -7,14 +7,17 @@
 #include "CameraProviderExtension.h"
 
 #include <fstream>
+#include <unistd.h>
+#include <android-base/properties.h>
+#include <string>
 
 #define TORCH_BRIGHTNESS "brightness"
 #define TORCH_MAX_BRIGHTNESS "max_brightness"
-#define TOGGLE_SWITCH "/sys/devices/platform/soc/c440000.qcom,spmi/spmi-0/spmi0-05/c440000.qcom,spmi:qcom,pm8150l@5:qcom,leds@d300/leds/led:switch_2/brightness"
+#define TOGGLE_SWITCH "/sys/devices/platform/soc/c42d000.qcom,spmi/spmi-0/0-02/c42d000.qcom,spmi:qcom,pm8350c@2:qcom,flash_led@ee00/leds/led:switch_1/brightness"
 
 static std::string kTorchLedPaths[] = {
-    "/sys/devices/platform/soc/c440000.qcom,spmi/spmi-0/spmi0-05/c440000.qcom,spmi:qcom,pm8150l@5:qcom,leds@d300/leds/led:torch_0",
-    "/sys/devices/platform/soc/c440000.qcom,spmi/spmi-0/spmi0-05/c440000.qcom,spmi:qcom,pm8150l@5:qcom,leds@d300/leds/led:torch_1",
+    "/sys/devices/platform/soc/c42d000.qcom,spmi/spmi-0/0-02/c42d000.qcom,spmi:qcom,pm8350c@2:qcom,flash_led@ee00/leds/led:torch_0",
+    "/sys/devices/platform/soc/c42d000.qcom,spmi/spmi-0/0-02/c42d000.qcom,spmi:qcom,pm8350c@2:qcom,flash_led@ee00/leds/led:torch_1",
 };
 
 /**
@@ -63,13 +66,14 @@ int32_t getTorchStrengthLevelExt() {
 }
 
 void setTorchStrengthLevelExt(int32_t torchStrength, bool enabled) {
-    set(TOGGLE_SWITCH, 0);
-    for (auto& path : kTorchLedPaths) {
-        auto node = path + "/" + TORCH_BRIGHTNESS;
-        set(node, torchStrength);
+    if (!enabled) {
+        android::base::SetProperty("camera.torch.enabled", "0");
+        return;
     }
-    if (enabled)
-        set(TOGGLE_SWITCH, 255);
+
+    // libbase automatically handles the string conversion beautifully
+    android::base::SetProperty("camera.torch.level", std::to_string(torchStrength));
+    android::base::SetProperty("camera.torch.enabled", "1");
 }
 
 void setTorchModeExt(bool enabled) {

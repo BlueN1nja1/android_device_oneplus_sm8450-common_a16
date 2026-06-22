@@ -763,13 +763,20 @@ service esepmdaemon /system/vendor/bin/esepmdaemon
     user system
     group nfc
 
+# Offline Charging Fix Attempt 1 (WIP)
 on charger
-    #Enable UFS LPM back
+    wait /dev/block/mapper/system
+    wait /dev/block/mapper/vendor
+    mount_all /vendor/etc/fstab.qcom --early
+
     write /sys/bus/platform/devices/1d84000.ufshc/clkscale_enable 1
     write /sys/bus/platform/devices/1d84000.ufshc/auto_hibern8 5000
     write /sys/bus/platform/devices/1d84000.ufshc/clkgate_enable 1
+
     setprop persist.sys.usb.config mass_storage
-    start qcom-post-boot
+    setprop sys.usb.configfs 1
+
+    class_start charger
 
 #add poweroffhandler
 service poweroffhandler /system/vendor/bin/poweroffhandler

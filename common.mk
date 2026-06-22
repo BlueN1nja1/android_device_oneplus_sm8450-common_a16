@@ -206,8 +206,7 @@ $(call soong_config_set,lineage_health,charging_control_charging_path,/sys/class
 
 # LiveDisplay
 #PRODUCT_PACKAGES += \
-    vendor.lineage.livedisplay-service.oplus
-#$(call soong_config_set,lineage_health,charging_control_charging_path,/sys/class/oplus_chg/battery/mmi_charging_enable)
+#   vendor.lineage.livedisplay-service.oplus
 
 # Media
 PRODUCT_COPY_FILES += \
@@ -224,7 +223,7 @@ $(call inherit-product, hardware/oplus/overlay/generic/generic.mk)
 $(call inherit-product, hardware/oplus/overlay/qssi/qssi.mk)
 
 DEVICE_PACKAGE_OVERLAYS += \
-    $(LOCAL_PATH)/overlay-lineage
+    $(LOCAL_PATH)/overlay-infinity
 
 PRODUCT_ENFORCE_RRO_TARGETS := *
 PRODUCT_PACKAGES += \

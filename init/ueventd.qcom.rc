@@ -257,6 +257,11 @@ subsystem mem_buf_vm
 /dev/bus/usb/003/005      0660   system     system
 /dev/hidraw*              0660   system     system
 
+# Grant cameraserver dynamic permissions to PM8350C flashlight nodes upon creation
+/sys/devices/platform/soc/c42d000\.qcom,spmi/spmi-0/0-02/c42d000\.qcom,spmi:qcom,pm8350c@2:qcom,flash_led@ee00/leds/led:torch_0 brightness 0660 cameraserver camera
+/sys/devices/platform/soc/c42d000\.qcom,spmi/spmi-0/0-02/c42d000\.qcom,spmi:qcom,pm8350c@2:qcom,flash_led@ee00/leds/led:torch_1 brightness 0660 cameraserver camera
+/sys/devices/platform/soc/c42d000\.qcom,spmi/spmi-0/0-02/c42d000\.qcom,spmi:qcom,pm8350c@2:qcom,flash_led@ee00/leds/led:switch_1 brightness 0660 cameraserver camera
+
 # wlan
 /dev/wcnss_wlan           0660   system     system
 /dev/wcnss_ctrl           0660   system     system
