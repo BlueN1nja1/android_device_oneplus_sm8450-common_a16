@@ -206,7 +206,7 @@ $(call soong_config_set,lineage_health,charging_control_charging_path,/sys/class
 
 # LiveDisplay
 #PRODUCT_PACKAGES += \
-#   vendor.lineage.livedisplay-service.oplus
+#    vendor.lineage.livedisplay@2.1-service.oplus
 
 # Media
 PRODUCT_COPY_FILES += \
@@ -242,6 +242,10 @@ PRODUCT_PACKAGES += \
     vendor_firmware_mnt_mountpoint
 
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
+
+# Patched QSEECOM Init (Fixes TrustZone Deadlock)
+PRODUCT_COPY_FILES += \
+    device/oneplus/sm8450-common/configs/etc/vendor.qti.hardware.qseecom@1.0-service.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/vendor.qti.hardware.qseecom@1.0-service.rc
 
 # Power
 PRODUCT_PACKAGES += \
@@ -359,7 +363,7 @@ $(call soong_config_set_bool,OPLUS_LINEAGE_VIBRATOR_HAL,USE_EFFECT_STREAM,true)
 $(call soong_config_set,OPLUS_LINEAGE_VIBRATOR_HAL,INCLUDE_DIR,$(LOCAL_PATH)/vibrator/include)
 
 PRODUCT_PACKAGES += \
-    vendor.qti.hardware.vibrator.service.oplus
+    android.hardware.vibrator.service.oplus-richtap
 
 PRODUCT_COPY_FILES += \
     vendor/qcom/opensource/vibrator/excluded-input-devices.xml:$(TARGET_COPY_OUT_VENDOR)/etc/excluded-input-devices.xml

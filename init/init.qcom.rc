@@ -763,19 +763,23 @@ service esepmdaemon /system/vendor/bin/esepmdaemon
     user system
     group nfc
 
-# Offline Charging Fix Attempt 1 (WIP)
 on charger
+# 1. Wait for and mount the dynamic partitions
+    # The charger UI needs the display drivers inside /vendor to turn the screen on
     wait /dev/block/mapper/system
     wait /dev/block/mapper/vendor
     mount_all /vendor/etc/fstab.qcom --early
 
+    # 2. Enable UFS LPM back (Your original power-saving lines)
     write /sys/bus/platform/devices/1d84000.ufshc/clkscale_enable 1
     write /sys/bus/platform/devices/1d84000.ufshc/auto_hibern8 5000
     write /sys/bus/platform/devices/1d84000.ufshc/clkgate_enable 1
 
+    # 3. Set USB configuration
     setprop persist.sys.usb.config mass_storage
     setprop sys.usb.configfs 1
 
+    # 4. Start the AOSP charger service class
     class_start charger
 
 #add poweroffhandler
