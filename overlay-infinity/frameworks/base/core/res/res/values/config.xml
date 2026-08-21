@@ -5,5 +5,7 @@
     -->
 <resources>
     <integer name="config_defaultPeakRefreshRate">120</integer>
-    <integer name="config_defaultRefreshRate">120</integer>
+    <integer name="config_defaultRefreshRate">60</integer>
+    <!-- Whether device supports LiveDisplay sunlight enhancement (HBM) -->
+    <bool name="config_supportLiveDisplaySunlightEnhancement">true</bool>
 </resources>

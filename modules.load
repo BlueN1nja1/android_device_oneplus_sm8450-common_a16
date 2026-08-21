@@ -42,6 +42,9 @@ core_hang_detect.ko
 soc_sleep_stats.ko
 rq_stats.ko
 dcc_v2.ko
+aw8697.ko
+haptic.ko
+haptic_feedback.ko
 smcinvoke_mod.ko
 microdump_collector.ko
 llcc_perfmon.ko

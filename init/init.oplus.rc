@@ -9,6 +9,10 @@ on fs
     write /proc/touchpanel/tp_fw_update 0
 
 on boot
+    # Alert Slider
+    chown system system /proc/tristatekey/tri_state
+    chmod 0660 /proc/tristatekey/tri_state
+
     # Display
     chown system system /dev/oplus_display
     chown system system /sys/kernel/oplus_display/dimlayer_bl_en
@@ -33,6 +37,12 @@ on boot
     chown cameraserver cameraserver /sys/kernel/tof_control/app0/period
     chown cameraserver cameraserver /sys/kernel/tof_control/chip_enable
     chown cameraserver cameraserver /sys/kernel/tof_control/driver_debug
+
+on post-fs-data
+    # Create audio directories for ACDB delta files
+    mkdir /data/vendor/audio 0770 audio audio
+    mkdir /data/vendor/audio/acdbdata 0770 media audio
+    mkdir /data/vendor/audio/acdbdata/delta 0770 media audio
 
 on property:ro.boot.prjname=*
     # Display
